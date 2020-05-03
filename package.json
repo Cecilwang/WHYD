@@ -1,0 +1,15 @@
+{
+  "name": "WHYD",
+  "version": "1.0.0",
+  "description": "What have you done!",
+  "main": "main.js",
+  "repository": "git@github.com:Cecilwang/WHYD.git",
+  "author": "cecilwang <cecilwang@126.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build src/html/*.html"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
