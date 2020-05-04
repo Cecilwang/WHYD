@@ -1,11 +1,11 @@
+require('dotenv').config();
+
 var SETUP_ICON = 'https://img.icons8.com/metro/26/000000/console.png';
 
 var PLAY_ICON = 'https://img.icons8.com/metro/26/000000/play.png';
 var PAUSE_ICON = 'https://img.icons8.com/metro/26/000000/pause.png';
 var STOP_ICON = 'https://img.icons8.com/metro/26/000000/stop.png';
 var RECORD_ICON = 'https://img.icons8.com/metro/26/000000/ball-point-pen.png';
-
-console.log('Welcome to WHYD!');
 
 const authorizedPopUpURL = (t, title, url) => {
   return t.get('member', 'private', 'token').then(token => {
@@ -37,12 +37,11 @@ window.TrelloPowerUp.initialize(
         }]
       },
       'card-badges': t => {
-        return t.card('all').then(function(card) {
-          // console.log(card);
-          return [{text: card.idShort}];
+        return t.card('all').then(card => {
+          return [];
         });
       },
-      'card-detail-badges': () => {},
+      'card-detail-badges': t => {},
       'card-buttons': t => {
         return [
           {
