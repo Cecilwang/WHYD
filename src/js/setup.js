@@ -1,5 +1,5 @@
 var t = TrelloPowerUp.iframe(
-    {appKey: '918b1a6a97af102c4c86081fbb06a221', appName: 'WHYD'});
+    {appKey: process.env.APP_KEY, appName: process.env.APP_NAME});
 
 window.setup.addEventListener('submit', e => {
   // Stop the browser trying to submit the form itself.

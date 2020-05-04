@@ -20,7 +20,7 @@
         name: 'WHYD',
         expiration: 'never',
         scope: 'read,write',
-        key: '918b1a6a97af102c4c86081fbb06a221',
+        key: process.env.APP_KEY,
         callback_method: 'fragment',
         return_url: 'https://' + window.location.host + '/auth-success.html',
       };
