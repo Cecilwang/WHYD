@@ -6,6 +6,8 @@ window.setup.addEventListener('submit', e => {
 
   console.info('WHYD List Name:', window.setup.listName.value);
 
+  // Create the WHYD list
+
   return t.closePopup();
 });
 
