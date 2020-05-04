@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/authorize.css">
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <button id="auth-btn" type="submit" class="mod-primary">Authorize WHYD to Access Trello</button>
+    </div>
+    <script>
+      window.Promise = TrelloPowerUp.Promise;
+      var t = TrelloPowerUp.iframe();
+
+      var trelloAuthUrl = 'https://trello.com/1/authorize?';
+
+      // you'll want to update these for your own app :)
+      var authParams = {
+        name: 'WHYD',
+        expiration: 'never',
+        scope: 'read,write',
+        key: '918b1a6a97af102c4c86081fbb06a221',
+        callback_method: 'fragment',
+        return_url: 'https://' + window.location.host + '/auth-success.html',
+      };
+
+      var params = Object.keys(authParams);
+      params.forEach(param => {
+        trelloAuthUrl += param + '=' + encodeURIComponent(authParams[param]) + '&';
+      });
+
+      var tokenLooksValid = function(token) {
+        return /^[0-9a-f]{64}$/.test(token);
+      };
+
+      var storageHandler = evt => {
+        if (evt.key === 'token' && evt.newValue) {
+          // Do something with the token here, then...
+          authorizeWindow.close();
+          window.removeEventListener('storage', storageHandler);
+        }
+      };
+
+      var authorizeOpts = {
+        height: 680,
+        width: 580,
+        validToken: tokenLooksValid,
+        windowCallback: function(authorizeWindow) {
+          // This callback gets called with the handle to the
+          // authorization window. This can be useful if you
+          // can't call window.close() in your new window
+          // (such as the case when your authorization page
+          // is rendered inside an iframe).
+          window.addEventListener('storage', storageHandler);
+        }
+      };
+
+      document.getElementById('auth-btn').addEventListener('click', () => {
+        t.authorize(trelloAuthUrl, authorizeOpts)
+        .then(token => {
+          return t.set('member', 'private', 'token', token);
+        })
+          .then(() => {
+          // now that the token is stored, we can close this popup
+          // you might alternatively choose to open a new popup
+          return t.closePopup();
+        });
+      });
+    </script>
+  </body>
+</html>
