@@ -1,0 +1,7 @@
+label {
+  margin-bottom: 8px;
+}
+
+input[type="text"] {
+  margin-bottom: unset;
+}
