@@ -59,7 +59,7 @@
       document.getElementById('auth-btn').addEventListener('click', () => {
         t.authorize(trelloAuthUrl, authorizeOpts)
         .then(token => {
-          return t.set('member', 'private', 'token', token);
+          return t.set('member', 'private', process.env.TOKEN_NAME, token);
         })
           .then(() => {
           // now that the token is stored, we can close this popup
