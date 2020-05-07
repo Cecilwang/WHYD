@@ -8,11 +8,11 @@ const DURATION_ICON = 'https://img.icons8.com/metro/26/000000/watch.png';
 const TIME_ICON = 'https://img.icons8.com/metro/26/000000/time.png';
 
 const getSummaryBadges = t => {
-  return t.get('card', 'shared', 'WHYD', {time: null, times: 0, duration: 0})
+  return t.get('card', 'shared', 'WHYD', {start: null, times: 0, duration: 0})
       .then(data => {
         ret = [
           {icon: TIMES_ICON, text: `${data.times}times`},
-          {icon: DURATION_ICON, text: `${data.duration}s`}
+          {icon: DURATION_ICON, text: `${data.duration}ms`}
         ];
         return ret;
       });
