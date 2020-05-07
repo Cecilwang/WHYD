@@ -9,14 +9,12 @@ const createWHYDList = (t, name) => {
   });
 };
 
-window.setup.addEventListener('submit', e => {
-  // Stop the browser trying to submit the form itself.
-  e.preventDefault();
+document.getElementById('setup').addEventListener('click', e => {
   // TODO: Check listName is valid.
   return createWHYDList(t, window.setup.listName.value)
       .then(() => t.closePopup());
 });
 
 t.render(() => {
-  t.sizeTo('#setup').done();
+  t.sizeTo('#content').done();
 });
