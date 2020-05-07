@@ -9,27 +9,42 @@ const request = (method, uri, qs) => {
 };
 
 const requestTrello = (t, method, uri, qs) => {
+  uriPrefix = `https://api.trello.com/1/`;
   return trelloClient.getToken(t).then(token => {
     qs.key = process.env.APP_KEY;
     qs.token = token;
-    return request(method, uri, qs);
+    return request(method, uriPrefix + uri, qs);
   });
+};
+
+const getTrello = (t, uri, qs) => {
+  return requestTrello(t, 'GET', uri, qs);
 };
 
 const postTrello = (t, uri, qs) => {
   return requestTrello(t, 'POST', uri, qs);
 };
 
+const getList = (t, id) => {
+  return getTrello(t, `lists/${id}`);
+};
+
 const createList = (t, name) => {
   return t.board('id').then(idBoard => idBoard.id).then(idBoard => {
-    return postTrello(t, `https://api.trello.com/1/lists`, {name, idBoard});
+    return postTrello(t, `lists`, {name, idBoard});
   });
+};
+
+const getLabel = (t, id) => {
+  return getTrello(t, `labels/${id}`);
 };
 
 const trelloAPI = {
   requestTrello,
   postTrello,
+  getList,
   createList,
+  getLabel,
 };
 
 module.exports = trelloAPI;
