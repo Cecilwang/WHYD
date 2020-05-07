@@ -9,7 +9,7 @@ const authorizedCallback = callback => {
         return t.popup({
           title: 'Authorize WHYD to Access Trello',
           url: './authorize.html',
-          height: 50,
+          height: 40,
         });
       } else {
         return callback(t);

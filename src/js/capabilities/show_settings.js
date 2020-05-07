@@ -1,14 +1,8 @@
 const showSettings = t => {
-  return [{
-    text: 'WHYD Settings',
-    callback: t => {
-      return t.popup({
-        title: 'WHYD Settings',
-        url: './settings.html',
-      });
-    },
-    condition: 'edit'
-  }];
+  return t.popup({
+    title: 'WHYD Settings',
+    url: './settings.html',
+  });
 };
 
 module.exports = showSettings;

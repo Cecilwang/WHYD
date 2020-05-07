@@ -11,7 +11,7 @@ const createWHYDList = (t, name) => {
 
 document.getElementById('setup').addEventListener('click', e => {
   // TODO: Check listName is valid.
-  return createWHYDList(t, window.setup.listName.value)
+  return createWHYDList(t, window.content.listName.value)
       .then(() => t.closePopup());
 });
 
