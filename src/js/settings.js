@@ -1,5 +1,7 @@
-var t = TrelloPowerUp.iframe(
-    {appKey: process.env.APP_KEY, appName: process.env.APP_NAME});
+var t = TrelloPowerUp.iframe({
+  appKey: process.env.APP_KEY,
+  appName: process.env.APP_NAME,
+});
 
 document.getElementById('deauthorize').addEventListener('click', e => {
   return t.getRestApi()

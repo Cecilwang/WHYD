@@ -1,7 +1,9 @@
 var trelloAPI = require('./trello/trello_api.js');
 
-var t = TrelloPowerUp.iframe(
-    {appKey: process.env.APP_KEY, appName: process.env.APP_NAME});
+var t = TrelloPowerUp.iframe({
+  appKey: process.env.APP_KEY,
+  appName: process.env.APP_NAME,
+});
 
 const createWHYDList = (t, name) => {
   return trelloAPI.createList(t, name).then(list => {
