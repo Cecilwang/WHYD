@@ -1,28 +1,34 @@
-var rp = require('request-promise');
-
 var trelloClient = require('./trello_client.js');
 
-const request = (method, uri, qs) => {
-  return rp({method, uri, qs, json: true, timeout: 120000})
-      .then(response => response)
-      .catch(err => console.error('Failed to request:', err));
+const request = (method, url, qs) => {
+  if (qs) {
+    url += '?';
+    for (let [k, v] of Object.entries(qs)) {
+      url += `${k}=${v}&`;
+    }
+    url = url.slice(0, -1);
+  }
+  // console.info('fetch: ', url);
+  return fetch(url, {method, url, qs})
+      .catch(err => console.error('Failed to request:', err))
+      .then(response => response.json());
 };
 
-const requestTrello = (t, method, uri, qs) => {
-  uriPrefix = `https://api.trello.com/1/`;
+const requestTrello = (t, method, url, qs) => {
+  urlPrefix = `https://api.trello.com/1/`;
   return trelloClient.getToken(t).then(token => {
     qs.key = process.env.APP_KEY;
     qs.token = token;
-    return request(method, uriPrefix + uri, qs);
+    return request(method, urlPrefix + url, qs);
   });
 };
 
-const getTrello = (t, uri, qs) => {
-  return requestTrello(t, 'GET', uri, qs);
+const getTrello = (t, url, qs) => {
+  return requestTrello(t, 'GET', url, qs);
 };
 
-const postTrello = (t, uri, qs) => {
-  return requestTrello(t, 'POST', uri, qs);
+const postTrello = (t, url, qs) => {
+  return requestTrello(t, 'POST', url, qs);
 };
 
 const getList = (t, id) => {

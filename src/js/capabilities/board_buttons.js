@@ -1,6 +1,6 @@
 var trelloClient = require('../trello/trello_client.js');
 
-var SETUP_ICON = 'https://img.icons8.com/metro/26/000000/console.png';
+const SETUP_ICON = 'https://img.icons8.com/metro/26/000000/console.png';
 
 const boardButtons = t => {
   return [{
