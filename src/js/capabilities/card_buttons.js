@@ -6,7 +6,7 @@ const PEN_ICON = 'https://img.icons8.com/metro/26/000000/ball-point-pen.png';
 
 const beginCallback = t => {
   return WHYD.getWHYD(t).then(data => {
-    if (data.start) {
+    if (data.begin) {
       // Have began.
       return;
     } else {
@@ -17,7 +17,7 @@ const beginCallback = t => {
 
 const endCallback = t => {
   return WHYD.getWHYD(t).then(data => {
-    if (data.start) {
+    if (data.begin) {
       return WHYD.endWHYD(t, data);
     } else {
       // Haven't began.
@@ -26,7 +26,11 @@ const endCallback = t => {
   });
 };
 
-const recordCallback = t => {};
+const recordCallback = t => {
+  return WHYD.getWHYD(t).then(data => {
+    return WHYD.recordWHYD(t, data, 0, 100000);
+  });
+};
 
 const cardButtons = t => {
   return [

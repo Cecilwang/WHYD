@@ -13,27 +13,29 @@ const CALENDER_ICON = 'https://img.icons8.com/metro/26/000000/today.png';
 const getSummaryBadges = t => {
   return WHYD.getWHYD(t).then(data => {
     let ret = [];
-    if (data.start) {
+    if (data.begin) {
       ret.push({
         dynamic: () => {
           return {
             icon: HOURGLASS_SAND_ICON,
-            text: `${utils.formatTime(Date.now() - data.start)} <- ${
-                utils.formatFullTime(data.start)}`,
+            text: `${utils.formatTime(Date.now() - data.begin)} <- ${
+                utils.formatFullTime(data.begin)}`,
             refresh: 10,
           };
         }
       });
     }
-    ret.push(
-        {
-          icon: PEN_ICON,
-          text: `${data.times} times`,
-        },
-        {
-          icon: WATCH_ICON,
-          text: utils.formatTime(data.duration),
-        });
+    if (data.times) {
+      ret.push(
+          {
+            icon: PEN_ICON,
+            text: `${data.times} times`,
+          },
+          {
+            icon: WATCH_ICON,
+            text: utils.formatTime(data.duration),
+          });
+    }
     return ret;
   });
 };
@@ -45,6 +47,21 @@ const getLabelBadges = t => {
       color: label.color,
     };
   }));
+};
+
+const getURLBadges = t => {
+  return t.card('all').then(card => card.attachments.map(attachment => {
+    console.info(attachment);
+    return {
+      text: `<a href="https://www.w3schools.com/html/">A</a>`,
+    };
+  }));
+  // document.querySelectorAll('span[class=badge-text]').forEach(badgeText => {
+  //  console.info(badgeText);
+  //  if (badgeText.innerHTML.startsWith('<a ')) {
+  //    console.info(badgeText);
+  //  }
+  //});
 };
 
 const cardBadges = t => {

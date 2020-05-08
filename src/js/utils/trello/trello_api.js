@@ -55,6 +55,26 @@ const getLabel = (t, id) => {
   return getTrello(t, `labels/${id}`);
 };
 
+const createCustomField = (t) => {
+  return t.board('id').then(idModel => {
+    return postTrello(t, `customFields`, {}, {
+      body: JSON.stringify({
+        idModel: idModel,
+        modelType: 'board',
+        name: 'test',
+      }),
+      headers: {'Accept': 'application/json'}
+    });
+  });
+};
+
+const getCustomField = (t) => {
+  return t.card('id').then(card => card.id).then(idCard => {
+    url = `cards/{idCard}/customFieldItems`;
+    return getTrello(t, url);
+  });
+};
+
 const updateCustomField = (t, idCustomField, data) => {
   return t.card('id').then(card => card.id).then(idCard => {
     url = `cards/${idCard}/customField/${idCustomField}/item`;
@@ -74,6 +94,7 @@ const trelloAPI = {
   getList,
   createList,
   getLabel,
+  createCustomField,
   updateCustomField,
 };
 
