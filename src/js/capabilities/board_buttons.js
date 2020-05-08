@@ -1,4 +1,4 @@
-var trelloClient = require('../trello/trello_client.js');
+var trelloClient = require('../utils/trello/trello_client.js');
 
 const CONSOLE_ICON = 'https://img.icons8.com/metro/26/000000/console.png';
 

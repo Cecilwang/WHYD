@@ -1,5 +1,5 @@
-var WHYD = require('../whyd.js');
-var utils = require('../utils.js');
+var WHYD = require('../utils/whyd.js');
+var utils = require('../utils/utils.js');
 
 const {Promise} = window.TrelloPowerUp;
 
@@ -14,20 +14,16 @@ const getSummaryBadges = t => {
   return WHYD.getWHYD(t).then(data => {
     let ret = [];
     if (data.start) {
-      ret.push(
-          {
-            dynamic: () => {
-              return {
-                icon: HOURGLASS_SAND_ICON,
-                text: utils.formatTime(Date.now() - data.start),
-                refresh: 10,
-              };
-            }
-          },
-          {
-            icon: CALENDER_ICON,
-            text: utils.formatFullTime(data.start),
-          });
+      ret.push({
+        dynamic: () => {
+          return {
+            icon: HOURGLASS_SAND_ICON,
+            text: `${utils.formatTime(Date.now() - data.start)} <- ${
+                utils.formatFullTime(data.start)}`,
+            refresh: 10,
+          };
+        }
+      });
     }
     ret.push(
         {

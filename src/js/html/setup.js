@@ -1,4 +1,4 @@
-var WHYD = require('../whyd.js');
+var WHYD = require('../utils/whyd.js');
 
 var t = TrelloPowerUp.iframe({
   appKey: process.env.APP_KEY,

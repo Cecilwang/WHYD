@@ -8,6 +8,23 @@ const setWHYD = (t, data) => {
   return t.set('card', 'shared', 'WHYD', data);
 };
 
+const beginWHYD = (t, data) => {
+  data.start = Date.now();
+  return setWHYD(t, data);
+};
+
+const recordWHYD = (t, begin, end) => {
+
+};
+
+const endWHYD = (t, data) => {
+  now = Date.now();
+  data.times += 1;
+  data.duration += now - data.start;
+  data.start = null;
+  return setWHYD(t, data);
+};
+
 const createWHYDList = (t, name) => {
   return trelloAPI.createList(t, name).then(list => {
     console.info(list);
@@ -17,6 +34,9 @@ const createWHYDList = (t, name) => {
 const WHYD = {
   getWHYD,
   setWHYD,
+  beginWHYD,
+  recordWHYD,
+  endWHYD,
   createWHYDList,
 };
 
