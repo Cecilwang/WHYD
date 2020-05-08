@@ -13,7 +13,7 @@ const beginWHYD = (t, data) => {
   return setWHYD(t, data);
 };
 
-const recordWHYD = (t, begin, end) => {
+const recordWHYD = (t, n, begin, end) => {
 
 };
 
